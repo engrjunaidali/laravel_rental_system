@@ -16,11 +16,8 @@ use App\Http\Controllers\leasesController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::view('/admin', 'admin.dashboard');
+// Route::view('/', 'login1');
+Route::view('/', 'auth.login1')->name('login1');
 
 Auth::routes();
 
@@ -32,11 +29,15 @@ Route::get('/admin', [App\Http\Controllers\adminController::class, 'index'])->na
 Route::prefix('properties')->middleware('auth')->group(function () {
     Route::get('/', [App\Http\Controllers\propertiesController::class, 'index'])->name('Properties');
     Route::get('/create', [App\Http\Controllers\propertiesController::class, 'create']);
-    Route::post('/store', [App\Http\Controllers\propertiesController::class, 'store']);
+    Route::post('/store', [App\Http\Controllers\propertiesController::class, 'store'])->name('create.property');
     Route::get('/delete/{pid}', [App\Http\Controllers\propertiesController::class, 'destroy']);
     Route::get('/edit/{pid}', [App\Http\Controllers\propertiesController::class, 'edit']);
-    Route::post('/update/{pid}', [App\Http\Controllers\propertiesController::class, 'update']);
+    Route::post('/update/{pid}', [App\Http\Controllers\propertiesController::class, 'update'])->name('update.property');
     Route::get('/search', [App\Http\Controllers\propertiesController::class, 'search']);
+
+    // Route::post('/edit-add', [App\Http\Controllers\propertiesController::class, 'store']);
+
+
 
 });
 

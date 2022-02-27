@@ -80,7 +80,8 @@ class propertiesController extends Controller
     public function edit($pid)
     {
         $properties = Property::find($pid);
-        return view('admin.properties.edit',['properties'=>$properties]);
+        // return view('admin.properties.edit',['properties'=>$properties]);
+        return view('admin.properties.add-edit',['properties'=>$properties]);
     }
 
     /**

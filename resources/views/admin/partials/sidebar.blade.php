@@ -68,7 +68,7 @@
               {{-- Employees --}}
                <li class="nav-item">
                 <a href="/employees" class="nav-link {{(Route::current()->getName()) == 'employees' ? 'active' : ''}}">
-                  <i class="nav-icon fas fa-person"></i>
+                  <i class="nav-icon fa fa-users"></i>
                   <p>
                     Employees
                   </p>
@@ -76,18 +76,24 @@
               </li>
 
               {{-- Logout --}}
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
+              
                 <li class="nav-item">
-                <button href="{{ route('logout') }}" class="nav-link">
-                  <i class="nav-icon fas fa-logout"></i>
+                  
+                <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();" class="nav-link">
+                  <i class="nav-icon fa fa-location-arrow"></i>
                   <p>
                     Logout
                   </p>
-                </button>
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+              </form>
                 
               </li>
-            </form>
+           
                
 
 
