@@ -54,6 +54,19 @@
                     </div>
                   </div>
 
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Location</label>
+                    <div class="col-sm-10">
+                      <select class="form-control select2" value="@if(isset($properties->location)){{ $properties->location }}@endif">
+
+                        @foreach ($locations as $location)
+                        <option>{{ $location->location }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    
+                  </div>
+
                   <div class="form-group row">
                     <label for="price" class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
@@ -97,7 +110,7 @@
                   </div>
                   
                   <div class="form-group row">
-                    <label for="description" class="col-sm-2 col-form-label">Description</label>
+                    <label for="description" class="col-sm-2 col-form-label">Desc.</label>
                     <div class="col-sm-10">
                       <input name="description" value="@if(isset($properties->description)){{ $properties->description }}@endif" type="Text" class="form-control" id="description" placeholder="Description">
                     </div>

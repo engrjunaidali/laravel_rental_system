@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Property;
+use App\Models\Location;
 
 class propertiesController extends Controller
 {
@@ -35,8 +36,9 @@ class propertiesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.properties.create');
+    {   
+        $locations = Location::all();
+        return view('admin.properties.add-edit',['locations'=>$locations]);
     }
 
     /**
@@ -80,8 +82,9 @@ class propertiesController extends Controller
     public function edit($pid)
     {
         $properties = Property::find($pid);
+        $locations = Location::all();
         // return view('admin.properties.edit',['properties'=>$properties]);
-        return view('admin.properties.add-edit',['properties'=>$properties]);
+        return view('admin.properties.add-edit',['properties'=>$properties,'locations'=>$locations]);
     }
 
     /**
