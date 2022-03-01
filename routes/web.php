@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\Authenticate;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\adminController;
@@ -24,42 +26,51 @@ Auth::routes();
 // Admin Routes
 Route::get('/admin', [App\Http\Controllers\adminController::class, 'index'])->name('Dashboard')->middleware('auth');
 
-// Properties
-
-Route::prefix('properties')->middleware('auth')->group(function () {
-    Route::get('/', [App\Http\Controllers\propertiesController::class, 'index'])->name('Properties');
-    Route::get('/create', [App\Http\Controllers\propertiesController::class, 'create']);
-    Route::post('/store', [App\Http\Controllers\propertiesController::class, 'store'])->name('create.property');
-    Route::get('/delete/{pid}', [App\Http\Controllers\propertiesController::class, 'destroy']);
-    Route::get('/edit/{pid}', [App\Http\Controllers\propertiesController::class, 'edit']);
-    Route::post('/update/{pid}', [App\Http\Controllers\propertiesController::class, 'update'])->name('update.property');
-    Route::get('/search', [App\Http\Controllers\propertiesController::class, 'search']);
-
-    // Route::post('/edit-add', [App\Http\Controllers\propertiesController::class, 'store']);
 
 
 
+
+
+Route::middleware([Authenticate::class])->group(function () {
+
+    // Properties
+    Route::prefix('properties')->group(function () {
+        Route::get('/', [App\Http\Controllers\propertiesController::class, 'index'])->name('Properties');
+        Route::get('/create', [App\Http\Controllers\propertiesController::class, 'create']);
+        Route::post('/store', [App\Http\Controllers\propertiesController::class, 'store'])->name('create.property');
+        Route::get('/delete/{pid}', [App\Http\Controllers\propertiesController::class, 'destroy']);
+        Route::get('/edit/{pid}', [App\Http\Controllers\propertiesController::class, 'edit']);
+        Route::post('/update/{pid}', [App\Http\Controllers\propertiesController::class, 'update'])->name('update.property');
+        Route::get('/search', [App\Http\Controllers\propertiesController::class, 'search']);
+    });
+
+    // Leases
+    Route::prefix('leases')->group(function () {
+        Route::get('/', [App\Http\Controllers\leasesController::class, 'index'])->name('Leases');
+        Route::get('/create', [App\Http\Controllers\leasesController::class, 'create'])->name('Create Lease');
+        Route::post('/store', [App\Http\Controllers\leasesController::class, 'store']);
+        Route::get('/delete/{pid}', [App\Http\Controllers\leasesController::class, 'destroy']);
+        Route::get('/edit/{pid}', [App\Http\Controllers\leasesController::class, 'edit'])->name('Edit Lease');
+        Route::post('/update/{pid}', [App\Http\Controllers\leasesController::class, 'update'])->name('Update Lease');
+        Route::get('/search', [App\Http\Controllers\leasesController::class, 'search']);
+    });
+
+    // Employess
+    Route::prefix('employees')->group(function () {
+        Route::get('/', [App\Http\Controllers\employeesController::class, 'index'])->name('Employees');
+        Route::get('/create', [App\Http\Controllers\employeesController::class, 'create'])->name('Create Employee');
+        Route::post('/store', [App\Http\Controllers\employeesController::class, 'store']);
+        Route::get('/delete/{pid}', [App\Http\Controllers\employeesController::class, 'destroy']);
+        Route::get('/edit/{pid}', [App\Http\Controllers\employeesController::class, 'edit'])->name('Edit Employee');
+        Route::post('/update/{pid}', [App\Http\Controllers\employeesController::class, 'update']);
+        Route::get('/search', [App\Http\Controllers\employeesController::class, 'search']);
+    });
+ 
 });
 
-Route::prefix('leases')->group(function () {
-    Route::get('/', [App\Http\Controllers\leasesController::class, 'index'])->name('Leases');
-    Route::get('/create', [App\Http\Controllers\leasesController::class, 'create'])->name('Create Lease');
-    Route::post('/store', [App\Http\Controllers\leasesController::class, 'store']);
-    Route::get('/delete/{pid}', [App\Http\Controllers\leasesController::class, 'destroy']);
-    Route::get('/edit/{pid}', [App\Http\Controllers\leasesController::class, 'edit'])->name('Edit Lease');
-    Route::post('/update/{pid}', [App\Http\Controllers\leasesController::class, 'update'])->name('Update Lease');
-    Route::get('/search', [App\Http\Controllers\leasesController::class, 'search']);
-});
 
-Route::prefix('employees')->group(function () {
-    Route::get('/', [App\Http\Controllers\employeesController::class, 'index'])->name('Employees');
-    Route::get('/create', [App\Http\Controllers\employeesController::class, 'create'])->name('Create Employee');
-    Route::post('/store', [App\Http\Controllers\employeesController::class, 'store']);
-    Route::get('/delete/{pid}', [App\Http\Controllers\employeesController::class, 'destroy']);
-    Route::get('/edit/{pid}', [App\Http\Controllers\employeesController::class, 'edit'])->name('Edit Employee');
-    Route::post('/update/{pid}', [App\Http\Controllers\employeesController::class, 'update']);
-    Route::get('/search', [App\Http\Controllers\employeesController::class, 'search']);
-});
+
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

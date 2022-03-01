@@ -69,7 +69,7 @@
                   <div class="form-group row">
                     <label for="contact_no" class="col-sm-2 col-form-label">Contact No</label>
                     <div class="col-sm-10">
-                      <input name="contact_no" type="Text" class="form-control" id="contact_no" placeholder="Contact No">
+                      <input name="contact_no" type="number" class="form-control" id="contact_no" maxlength = "11" placeholder="Contact No">
                     </div>
                   </div>
 

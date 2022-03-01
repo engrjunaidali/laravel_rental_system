@@ -27,6 +27,11 @@
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
 
   <script src="{{ url('https://use.fontawesome.com/967e295514.js') }}"></script>
+
+  
+{{-- Tables --}}
+
+<link rel="stylesheet" type="text/css" href="{{ url('https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -47,7 +52,7 @@
         <a href="index3.html" class="nav-link">Home</a>
       </li> --}}
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">{{ (Route::current()->getName()) }}</a>
+        <a href="#" class="nav-link">Rental System</a>
       </li>
     </ul>
 
@@ -230,5 +235,11 @@
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+
+
+{{-- Tables --}}
+
+<script type="text/javascript" charset="utf8" src="{{ url('https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js') }}"></script>
+
 </body>
 </html>
