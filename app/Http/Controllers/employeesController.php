@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\File; 
 use Illuminate\Http\Request;
 
 use App\Models\Employee;
@@ -26,7 +27,7 @@ class employeesController extends Controller
      */
     public function create()
     {
-        return view('admin.employees.create');
+        return view('admin.employees.add-edit');
     }
 
     /**
@@ -38,14 +39,26 @@ class employeesController extends Controller
     public function store(Request $request)
     {
         $e = new Employee;
+
+        if($request->hasfile('image_path')){
+            $file = $request->file('image_path');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time().".".$ext;
+            $file->move('images/employees/',$filename);
+            $e->image_path = $filename;
+        }
+        // $e->image_path = time().".".$request->file('image_path')->getClientOriginalExtension();
         $e->first_name = $request->first_name;
         $e->last_name = $request->last_name;
         $e->dob = $request->dob;
+        $e->age = $request->age;
         $e->gender = $request->gender;
+        $e->cnic = $request->cnic;
+        $e->hire_date = $request->hire_date;
         $e->contact_no = $request->contact_no;
         $e->address = $request->address;
         $e->save();
-        return redirect('employees/create');
+        return redirect('employees/create')->with('success','Hoorey');
     }
 
     /**
@@ -68,7 +81,7 @@ class employeesController extends Controller
     public function edit($eid)
     {
         $employees = Employee::find($eid);
-        return view('admin.employees.edit',['employees'=>$employees]);
+        return view('admin.employees.add-edit',['employees'=>$employees]);
     }
 
     /**
@@ -81,6 +94,23 @@ class employeesController extends Controller
     public function update(Request $request, $eid)
     {
         $e=Employee::find($eid);
+
+
+        if($request->hasfile('image_path')){
+
+            // $image_name = $e->image_path;
+            // File::delete($image_name);
+
+            $path = public_path().'/images/employees/'.$e->image_path;
+            unlink($path);
+
+            $file = $request->file('image_path');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time().".".$ext;
+            $file->move('images/employees/',$filename);
+            $e->image_path = $filename;
+        }
+
         $e->first_name = $request->first_name;
         $e->last_name = $request->last_name;
         $e->dob = $request->dob;
@@ -99,6 +129,13 @@ class employeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $e = Employee::find($id);
+        if(isset($e->image_path)){
+            $path = public_path().'/images/employees/'.$e->image_path;
+            unlink($path);
+        }
+        
+        $e->delete();
+        return redirect('employees');
     }
 }

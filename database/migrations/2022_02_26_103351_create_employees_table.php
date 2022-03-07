@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id('eid');
+            $table->string('image_path')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->date('dob');
+            $table->string('age');
             $table->string('gender');
+            $table->string('cnic');
+            $table->date('hire_date');
             $table->string('contact_no');
             $table->longText('address');
             

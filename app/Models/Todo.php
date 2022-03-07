@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Location extends Model
+class Todo extends Model
 {
     use HasFactory;
-    protected $table = 'locations';
-    protected $primaryKey = 'lid';
-    // protected $timestamps = false;
+    protected $table = 'todos';
+    protected $primaryKey = 'todo_id';
+    
 }

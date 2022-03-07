@@ -22,8 +22,9 @@
     <link rel="stylesheet" href="{{ asset('login_page/css/style.css') }}">
 
     <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <title>Login #2</title>
+    
+    <link rel="icon" href="{{ asset('images/portfolio/favicon.png') }}">
+    <title>Login | Rental System</title>
 </head>
 
 <style>
@@ -49,7 +50,7 @@
 
                                 <div class="form-group first">
                                     <label for="email">Email</label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
                                 </div>
                                 <div class="form-group last mb-3">
                                     <label for="password">Password</label>
@@ -64,9 +65,13 @@
                                     <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
                                 </div>
                                 
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="submit" class="btn btn-primary btn-block mb-2">
                                     {{ __('login') }}
                                 </button>
+
+                                <div class="d-flex my-3 align-items-center">
+                                    <span class="mr-auto"><a href="/register1" class="">Register</a></span>
+                                </div>
 
                             </form>
 

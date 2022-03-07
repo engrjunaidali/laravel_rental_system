@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Property;
-use App\Models\Employee;
-use App\Models\Todo;
-use Illuminate\Http\Request;
 
-class adminController extends Controller
+use Illuminate\Http\Request;
+use App\Models\Location;
+
+class locationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,17 +13,8 @@ class adminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $total_properties = Property::count();
-        $total_employees = Employee::count();
-
-        // Todo
-        $todos = Todo::orderBy('todo_id','DESC')->get();
-        return view('admin.dashboard',[
-            'total_properties'=>$total_properties,
-            'total_employees'=>$total_employees,
-            'todos'=>$todos
-        ]);
+    {
+        //
     }
 
     /**
@@ -45,7 +35,10 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $location = new Location;
+        $location->location = $request->name;
+        $location->save();
+        return "Success";
     }
 
     /**

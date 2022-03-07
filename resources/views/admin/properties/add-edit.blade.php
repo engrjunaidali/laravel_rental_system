@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Create Property</h1>
+                    <h1>{{ Request::path() =="properties/create"?'Create' : 'Update' }} Property</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -156,7 +156,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <button type="submit" class="btn btn-default">Cancel</button>
-                    <button type="submit" class="btn btn-primary float-right">Create</button>
+                    <button type="submit" class="btn btn-primary float-right">{{ Request::path() =="properties/create"?'Create' : 'Update' }}</button>
                 </div>
                 <!-- /.card-footer -->
                 </form>
