@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -23,7 +21,7 @@
 
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <a href="/leases/create" class="btn btn-primary btn-sm">Add Lease</a>
+                    <a href="/properties/create" class="btn btn-primary btn-sm">Add Property</a>
 
                 </div>
         
@@ -41,34 +39,34 @@
                             <table class="table table-hover text-nowrap" id="example1">
                                 <thead>
                                     <tr>
-                                        <th>LID</th>
-                                        <th>EID</th>
                                         <th>PID</th>
-                                        <th>DURATION</th>
-                                        <th>LEASE START</th>
-                                        <th>LEASE EXPIRE</th>
-                                        <th>RENT</th>
-                                        <th>DESC</th>
+                                        <th>LOCATION</th>
+                                        <th>PRICE</th>
+                                        <th>AREA</th>
+                                        <th>TYPE</th>
+                                        <th>BATHS</th>
+                                        <th>ROOMS</th>
+                                        <th>STORIES</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($leases as $lease)
+                                    @foreach ($properties as $property)
                                     <tr>
-                                        <td>{{ $lease->lid }}</td>
-                                        <td>{{ $lease->eid }}</td>
-                                        <td>{{ $lease->pid }}</td>
-                                        <td>{{ $lease->duration }}</td>
-                                        <td>{{ $lease->lease_start }}</td>
-                                        <td>{{ $lease->lease_expire }}</td>
-                                        <td>{{ $lease->rent }}</td>
-                                        <td>{{ $lease->description }}</td>
+                                        <td>{{ $property->pid }}</td>
+                                        <td>{{ $property->location }}</td>
+                                        <td>{{ $property->price }}</td>
+                                        <td>{{ $property->area }}</td>
+                                        <td>{{ $property->type }}</td>
+                                        <td>{{ $property->baths }}</td>
+                                        <td>{{ $property->rooms }}</td>
+                                        <td>{{ $property->stories }}</td>
                                         <td>
-                                            <a href="/leases/edit/{{$lease->lid}}"
+                                            <a href="/properties/edit/{{$property->pid}}"
                                                 class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="/leases/delete/{{$lease->lid}}"
+                                            <a href="/properties/delete/{{$property->pid}}"
                                                 class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i>
                                             </a>

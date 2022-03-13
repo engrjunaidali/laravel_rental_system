@@ -8,6 +8,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\propertiesController;
 use App\Http\Controllers\leasesController;
 use App\Http\Controllers\locationsController;
+use App\Http\Controllers\emailsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,18 +43,16 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/delete/{pid}', [App\Http\Controllers\propertiesController::class, 'destroy']);
         Route::get('/edit/{pid}', [App\Http\Controllers\propertiesController::class, 'edit']);
         Route::post('/update/{pid}', [App\Http\Controllers\propertiesController::class, 'update'])->name('update.property');
-        // Route::get('/search', [App\Http\Controllers\propertiesController::class, 'search']);
     });
     
     // Leases
     Route::prefix('leases')->group(function () {
         Route::get('/', [App\Http\Controllers\leasesController::class, 'index'])->name('leases');
-        Route::get('/create', [App\Http\Controllers\leasesController::class, 'create'])->name('Create Lease');
+        Route::get('/create', [App\Http\Controllers\leasesController::class, 'create']);
         Route::post('/store', [App\Http\Controllers\leasesController::class, 'store'])->name('create.lease');
         Route::get('/delete/{pid}', [App\Http\Controllers\leasesController::class, 'destroy']);
         Route::get('/edit/{pid}', [App\Http\Controllers\leasesController::class, 'edit'])->name('Edit Lease');
         Route::post('/update/{pid}', [App\Http\Controllers\leasesController::class, 'update'])->name('update.lease');
-        Route::get('/search', [App\Http\Controllers\leasesController::class, 'search']);
     });
 
     // Employess
@@ -64,7 +63,13 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/delete/{pid}', [App\Http\Controllers\employeesController::class, 'destroy']);
         Route::get('/edit/{pid}', [App\Http\Controllers\employeesController::class, 'edit']);
         Route::post('/update/{pid}', [App\Http\Controllers\employeesController::class, 'update'])->name('update.employee');
-        Route::get('/search', [App\Http\Controllers\employeesController::class, 'search']);
+    });
+
+    // Email
+    Route::prefix('emails')->group(function () {
+        Route::get('/compose', [emailsController::class, 'compose'])->name('compose');
+        Route::get('/inbox', [emailsController::class, 'inbox'])->name('inbox');
+        Route::get('/send-mail', [emailsController::class, 'sendMail']);
     });
  
 });
