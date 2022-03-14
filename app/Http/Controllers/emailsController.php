@@ -35,7 +35,7 @@ class emailsController extends Controller
         $from_email = 'engrjunaidali0@gmail.com';
         $data = array('name'=>'Sender Name', 'body' => 'body text of the testing mail.');
 
-        Mail::send('admin.emails.index',$data,function($messages) use($to_name,$to_email){
+        Mail::send('admin.emails.email',$data,function($messages) use($to_name,$to_email){
             $messages->to($to_email);
             $messages->subject('Laravel Test Mail');
         });
