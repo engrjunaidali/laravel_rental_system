@@ -110,3 +110,5 @@
 <script src="{{ asset('public/dist/js/demo.js') }}"></script>
 
 @endsection
+
+ 
